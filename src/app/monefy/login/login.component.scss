@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d9e3da;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px;
+    color: lightcyan;
+}
+
+.logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto 50px auto;
+    background-color: #dce4e0;
+    border-radius: 30px;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+    padding: 40px;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 90%;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #5874DC;
+    background-color: #f5f5f5;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #93a5cf;
+}
+
+p {
+    text-align: center;
+    cursor: pointer;
+    color: #070707;
+    transition: color 0.3s ease;
+}
+
+.highlighted {
+    text-decoration: underline;
+}
+
+.highlighted:hover {
+    color: #180689;
+    text-decoration: underline;
+}
