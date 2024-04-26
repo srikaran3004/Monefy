@@ -46,5 +46,4 @@ export class DashboardComponent {
   get currentMonthSavings(): number {
     return this.totalCurrentMonthIncome - this.totalCurrentMonthExpense;
   }
-
 }
