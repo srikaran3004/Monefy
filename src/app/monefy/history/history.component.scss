@@ -8,6 +8,9 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
     max-width: 800px;
     margin: 0 auto;
 }
@@ -38,7 +41,7 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #D8B5FF, #1EAE98);
+    background: linear-gradient(135deg, #008080, #80ced6);
     color: #ffffff;
     padding: 12px 24px;
     border: none;
@@ -83,26 +86,4 @@ body {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 6px;
-}
-
-.disabled-dropdown {
-    color: #6c757d;
-    background-color: #e9ecef;
-    pointer-events: none;
-}
-
-.navbar {
-    background: linear-gradient(135deg, #D8B5FF, #1EAE98);
-    padding: 5px 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 300px;
-    color: #111212;
-    width: 800px;
-    margin: 0 auto;
-}
-
-.strikeout {
-    text-decoration: line-through;
 }

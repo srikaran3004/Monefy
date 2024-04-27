@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SideNavComponent } from '../side-nav/side-nav.component';
 
 @Component({
-  selector: 'app-todo',
+  selector: 'app-history',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss'
+  imports: [ReactiveFormsModule, CommonModule, SideNavComponent],
+  templateUrl: './history.component.html',
+  styleUrl: './history.component.scss'
 })
-export class TodoComponent {
+export class HistoryComponent {
   todoForm: any;
-  selectedMonth: any;
+  selectedMonth: string;
   expenses: { month: string, expenseAmount: number }[] = [
     { month: 'January', expenseAmount: 1500 },
     { month: 'February', expenseAmount: 2000 },
@@ -80,9 +81,7 @@ export class TodoComponent {
   ];
 
   constructor(private fb: FormBuilder, private router: Router) {
-    const currentDate = new Date();
-    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
-    this.selectedMonth = currentMonth;
+    this.selectedMonth = new Date().toLocaleString('default', { month: 'long' });
   }
 
   ngOnInit(): void {
@@ -96,48 +95,8 @@ export class TodoComponent {
   onSubmitExpense() {
     if (this.todoForm.valid) {
       const newExpense = this.todoForm.value;
-      switch (this.selectedMonth) {
-        case 'January':
-          this.januaryExpense.push(newExpense);
-          break;
-        case 'February':
-          this.februaryExpense.push(newExpense);
-          break;
-        case 'March':
-          this.marchExpense.push(newExpense);
-          break;
-        case 'April':
-          this.aprilExpense.push(newExpense);
-          break;
-        case 'May':
-          this.mayExpense.push(newExpense);
-          break;
-        case 'June':
-          this.juneExpense.push(newExpense);
-          break;
-        case 'July':
-          this.julyExpense.push(newExpense);
-          break;
-        case 'August':
-          this.augustExpense.push(newExpense);
-          break;
-        case 'September':
-          this.septemberExpense.push(newExpense);
-          break;
-        case 'October':
-          this.octoberExpense.push(newExpense);
-          break;
-        case 'November':
-          this.novemberExpense.push(newExpense);
-          break;
-        case 'December':
-          this.decemberExpense.push(newExpense);
-          break;
-        default:
-          break;
-      }
+      this.getFilteredExpenses().push(newExpense);
       this.todoForm.reset();
-      this.todoForm.patchValue({ month: '', expenseType: '', expenseAmount: '' });
     }
   }
 
@@ -148,60 +107,7 @@ export class TodoComponent {
   }
 
   getFilteredExpenses() {
-    let filteredExpense: any[] = [];
     switch (this.selectedMonth) {
-      case 'January':
-        filteredExpense = [...this.januaryExpense];
-        break;
-      case 'February':
-        filteredExpense = [...this.februaryExpense];
-        break;
-      case 'March':
-        filteredExpense = [...this.marchExpense];
-        break;
-      case 'April':
-        filteredExpense = [...this.aprilExpense];
-        break;
-      case 'May':
-        filteredExpense = [...this.mayExpense];
-        break;
-      case 'June':
-        filteredExpense = [...this.juneExpense];
-        break;
-      case 'July':
-        filteredExpense = [...this.julyExpense];
-        break;
-      case 'August':
-        filteredExpense = [...this.augustExpense];
-        break;
-      case 'September':
-        filteredExpense = [...this.septemberExpense];
-        break;
-      case 'October':
-        filteredExpense = [...this.octoberExpense];
-        break;
-      case 'November':
-        filteredExpense = [...this.novemberExpense];
-        break;
-      case 'December':
-        filteredExpense = [...this.decemberExpense];
-        break;
-      default:
-        break;
-    }
-    return filteredExpense;
-  }
-
-  calculateTotalExpense(month: string): number {
-    let totalExpense = 0;
-    for (const income of this.gettodoFormonth(month)) {
-      totalExpense += income.expenseAmount;
-    }
-    return totalExpense;
-  }
-
-  gettodoFormonth(month: string): any[] {
-    switch (month) {
       case 'January':
         return this.januaryExpense;
       case 'February':
@@ -231,9 +137,12 @@ export class TodoComponent {
     }
   }
 
+  calculateTotalExpense(month: string): number {
+    return this.getFilteredExpenses().reduce((acc, curr) => acc + curr.expenseAmount, 0);
+  }
+
   onSave() {
     if (this.todoForm.valid) {
-      const incomeData = this.todoForm.value;
       this.todoForm.reset({ month: this.selectedMonth });
       this.getFilteredExpenses();
     }
@@ -245,9 +154,5 @@ export class TodoComponent {
 
   onBack() {
     this.router.navigate(['/monefy/dashboard']);
-  }
-
-  toggleSelection(expense: any) {
-    expense.selected = !expense.selected;
   }
 }
